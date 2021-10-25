@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import { useNavigation } from '@react-navigation/core';
+
+import { TextStyles } from '../../../assets/styles';
 
 export default function ConfirmEmailScreen() {
   const [code, setCode] = useState("");
@@ -24,7 +27,7 @@ export default function ConfirmEmailScreen() {
   return (
     <ScrollView contentContainerStyle={styles.root}
     showsVerticalScrollIndicator="false">
-        <Text style={styles.title}>Confirm your email</Text>
+        <Text style={TextStyles.title}>Confirm your email</Text>
 
         <CustomInput 
         placeholder="Enter your confirmation code"
@@ -53,21 +56,5 @@ const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
     padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    margin: 10,
-  },
-  text: {
-    color: 'gray',
-    marginVertical: 10,
-  },
-  link: {
-    color: "#FDB075",
-  },
-  buttonGroup: {
-    flexDirection: 'row',
   },
 })

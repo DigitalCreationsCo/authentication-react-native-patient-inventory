@@ -1,11 +1,11 @@
-import React from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
+import { Colors } from '../../../assets/styles/';
 
 export default function CustomInput({ value, setValue, placeholder, secureTextEntry }) {
-
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input}
+      <TextInput
       value={value}
       onChangeText={setValue}
       placeholder={placeholder}
@@ -17,15 +17,14 @@ export default function CustomInput({ value, setValue, placeholder, secureTextEn
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     width: '75%',
 
-    borderColor: '#efefef',
+    borderColor: Colors.lightGray,
     borderWidth: 1,
     borderRadius: 5,
 
     padding: 10,
     marginVertical: 5,
   },
-  input: {}
 })

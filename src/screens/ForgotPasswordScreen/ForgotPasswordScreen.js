@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import { useNavigation } from '@react-navigation/core';
+
+import { Colors, FontSizes, TextStyles } from '../../../assets/styles';
 
 export default function ForgotPasswordScreen() {
   const [username, setUsername] = useState("");
@@ -20,7 +23,7 @@ export default function ForgotPasswordScreen() {
   return (
     <ScrollView contentContainerStyle={styles.root}
     showsVerticalScrollIndicator="false">
-      <Text style={styles.title}>Reset your password</Text>
+      <Text style={TextStyles.title}>Reset your password</Text>
 
       <Text style={{width: '75%'}}>Username *</Text>
       <CustomInput 
@@ -44,21 +47,5 @@ const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
     padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    margin: 20,
-  },
-  text: {
-    color: 'gray',
-    marginVertical: 10,
-  },
-  link: {
-    color: "#FDB075",
-  },
-  buttonGroup: {
-    flexDirection: 'row',
   },
 })

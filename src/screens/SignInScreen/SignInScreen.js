@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { ScrollView, Image, StyleSheet, useWindowDimensions } from 'react-native';
-import Logo from '../../../assets/images/Logo.png';
+import { ScrollView, Image, Text, useWindowDimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import ClientController from '../../controller/';
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
-import { useNavigation } from '@react-navigation/core';
+
+import Logo from '../../../assets/images/Logo.png';
+import { TextStyles } from '../../../assets/styles';
 
 export default function SignInScreen() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");  
+  const [password, setPassword] = useState("");
+
+  const [message, setMessage] = useState("");
+
+  const [auth, setAuth] = useState("");
+  const [user, setUser] = useState("");
 
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
   const onSignInPressed = () => {
     //validate user
-
-    navigation.navigate("HomeScreen");
+    //need global state for storing auth token and user data
+    ClientController.signIn(username,password, navigation);
   };
 
   const onForgotPasswordPressed = () => {
@@ -27,10 +36,14 @@ export default function SignInScreen() {
     navigation.navigate("SignUpScreen");
   };
 
+  const inputIsEmpty = (value) => {
+    return value.length > 0 ? false : true
+  };
+
   return (
-    <ScrollView contentContainerStyle={styles.root}
+    <ScrollView contentContainerStyle={[TextStyles.root, { justifyContent: 'center' }]}
     showsVerticalScrollIndicator="false">
-        <Image style={styles.logo, { height: height * 0.3}}
+        <Image style={TextStyles.logo, { height: height * 0.3}}
         source={Logo} 
         resizeMode="contain"
         />
@@ -45,16 +58,21 @@ export default function SignInScreen() {
         setValue={setPassword}
         secureTextEntry />
         
+        <Text style={TextStyles.message}>{message}</Text>
+
         <CustomButton
         onPress={onSignInPressed}
         text="Sign In"
+        disabled={inputIsEmpty(username)}
         />
         <CustomButton
         onPress={onForgotPasswordPressed}
         text="Forgot password?"
         type="TERTIARY"
         />
+
         <SocialSignInButtons />
+
         <CustomButton
         onPress={onSignUpPressed}
         text="Don't have an account? Create one"
@@ -63,16 +81,3 @@ export default function SignInScreen() {
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo: {
-    maxHeight: 300,
-    width: '70%',
-    maxWidth: 500,
-  }
-})

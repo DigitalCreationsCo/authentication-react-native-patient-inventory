@@ -1,16 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import PatientList from '../../components/PatientList';
+import { View, Text } from 'react-native';
+
 import CustomButton from '../../components/CustomButton';
+import PatientList from '../../components/PatientList';
+
+import { TextStyles } from '../../../assets/styles';
+import { useNavigation } from '@react-navigation/core';
+
+
 
 export default function HomeScreen() {
+  
+  const navigation = useNavigation();
+
   const onAddPatientPressed = () => {
-    console.warn("Add Patient")
+    navigation.navigate("AddPatientScreen");
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Patient List</Text>
+    <View style={TextStyles.root}>
+      <Text style={TextStyles.title}>Patient List</Text>
       <PatientList />
       <CustomButton 
       onPress={onAddPatientPressed}
@@ -18,17 +27,3 @@ export default function HomeScreen() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    marginVertical: 20,
-  },
-})

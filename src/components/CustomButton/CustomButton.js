@@ -1,18 +1,22 @@
 import React from 'react'
 import { Text, StyleSheet, Pressable } from 'react-native'
+import {Colors, FontSizes, TextStyles } from '../../../assets/styles';
 
-export default function CustomButton({ onPress, text, type = "PRIMARY", bgColor, fgColor }) {
+export default function CustomButton({ onPress, disabled = false, text, type = "PRIMARY", bgColor, fgColor}) {
   return (
-    <Pressable onPress={onPress} 
-    style={[
-      styles.container, 
+    <Pressable onPress={onPress}
+    disabled={disabled}
+    style={({ pressed }) => [
+      styles.container,
       styles[`container_${type}`],
-      bgColor ? { backgroundColor: bgColor } : {}
-    ]}>
+      bgColor ? { backgroundColor: bgColor } : {},
+      disabled ? styles.disabled : {},
+      pressed ? styles.pressed : {},]
+    }>
       <Text style={[
-        styles.text, 
-        styles[`text_${type}`],
-        fgColor ? { color: fgColor } : {}
+        styles.text, styles[`text_${type}`],
+        fgColor ? { color: fgColor } : {},
+        disabled ? styles.disabled : {}
         ]}>{text}</Text>
     </Pressable>
   )
@@ -29,22 +33,29 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   container_PRIMARY: {
-    backgroundColor: '#3B71F3',
+    backgroundColor: Colors.blue,
   },
   container_SECONDARY: {
-    borderColor: "#3B71F3",
+    borderColor: Colors.blue,
     borderWidth: 2,
   },
   container_TERTIARY: {
   },
+  disabled: {
+    backgroundColor: Colors.gray,
+    color: Colors.lightGray,
+  },
+  pressed: {
+    backgroundColor: Colors.darkBlue,
+  },
   text: {
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.white,
   },
   text_SECONDARY: {
-    color: '#3B71F3',
+    color: Colors.blue,
   },
   text_TERTIARY: {
-    color: 'gray',
+    color: Colors.blue,
   },
 })

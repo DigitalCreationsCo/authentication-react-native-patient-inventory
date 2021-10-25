@@ -8,6 +8,7 @@ import ConfirmEmailScreen from '../screens/ConfirmEmailScreen/ConfirmEmailScreen
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen/ForgotPasswordScreen';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
 import HomeScreen from '../screens/HomeScreen';
+import AddPatientScreen from '../screens/AddPatient';
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
@@ -21,7 +22,7 @@ export default function Navigation() {
         <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
         
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-
+        <Stack.Screen name="AddPatientScreen" component={AddPatientScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

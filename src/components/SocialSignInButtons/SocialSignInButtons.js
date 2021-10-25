@@ -26,7 +26,7 @@ export default function SocialSignInButtons() {
         text="Sign in with Google" onPress={onSignInGoogle} />
         <CustomButton 
         fgColor="#363636"
-        bgColor="e3e3e3"
+        bgColor="#e3e3e3"
         text="Sign in with AppleID" onPress={onSignInApple} />
     </>
   )
