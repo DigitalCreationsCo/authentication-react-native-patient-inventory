@@ -14,15 +14,11 @@ export const Colors =
 
 export const FontSizes = 
 {
-  sm: 12,
   md: 18,
   lg: 24,
   xl: 32,
   xxl: 40,
 };
-
-const ButtonStyles = StyleSheet.create({
-})
 
 const TextStyles = StyleSheet.create({
   root: {
@@ -48,7 +44,6 @@ const TextStyles = StyleSheet.create({
   },
   mainText: {
     color: '#242424',
-    fontSize: FontSizes.sm,
   },
   message: {
     height: 20,
@@ -62,11 +57,11 @@ const TextStyles = StyleSheet.create({
     fontSize: FontSizes.lg,
     fontWeight: 'bold',
     color: Colors.darkBlue,
-    margin: 20,
+    marginVertical: 20,
   },
   link: {
     color: '#FDB075',
   },
 });
 
-export { ButtonStyles, TextStyles };
+export { TextStyles };

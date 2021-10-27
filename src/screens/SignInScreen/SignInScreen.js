@@ -16,16 +16,13 @@ export default function SignInScreen() {
 
   const [message, setMessage] = useState("");
 
-  const [auth, setAuth] = useState("");
-  const [user, setUser] = useState("");
-
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
   const onSignInPressed = () => {
     //validate user
     //need global state for storing auth token and user data
-    ClientController.signIn(username,password, navigation);
+    ClientController.signIn(username,password, navigation, setMessage);
   };
 
   const onForgotPasswordPressed = () => {

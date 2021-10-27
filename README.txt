@@ -6,6 +6,7 @@ EmailConfirmation.
 
 Reusable components that use decoupled global styles.
 Custom button components with styles for disabled, 
-pressed state, and valid inputs.
+pressed state.
+Form validation for submitted forms.
 Screen views use Controller class to send data requests
-to node.js web server.
+to a node.js web server.

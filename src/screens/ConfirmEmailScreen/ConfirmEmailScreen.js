@@ -8,12 +8,19 @@ import CustomButton from '../../components/CustomButton';
 import { TextStyles } from '../../../assets/styles';
 
 export default function ConfirmEmailScreen() {
+
   const [code, setCode] = useState("");
   
+  const [message, setMessage] = useState("");
+
   const navigation = useNavigation();
 
   const onConfirmPressed = () => {
-    navigation.navigate("HomeScreen");
+    if(!code) {
+      setMessage("Enter your confirmation code.")
+    } else {
+      navigation.navigate("NewPasswordScreen");
+    }
   };
 
   const onResendCodePressed = () => {
@@ -28,12 +35,14 @@ export default function ConfirmEmailScreen() {
     <ScrollView contentContainerStyle={styles.root}
     showsVerticalScrollIndicator="false">
         <Text style={TextStyles.title}>Confirm your email</Text>
-
+        <Text style={{ width: '75%' }}>A confirmation code has been sent to your email address.</Text>
         <CustomInput 
         placeholder="Enter your confirmation code"
         value={code} 
         setValue={setCode} 
         />
+
+        <Text style={TextStyles.message}>{message}</Text>
 
         <CustomButton text="Confirm" onPress={onConfirmPressed} />
 

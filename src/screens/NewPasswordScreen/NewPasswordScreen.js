@@ -5,16 +5,25 @@ import { useNavigation } from '@react-navigation/core';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import { Colors, FontSizes, TextStyles } from '../../../assets/styles';
+import { TextStyles } from '../../../assets/styles';
 
 export default function NewPasswordScreen() {
-  const [code, setCode] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
+
+  const [message, setMessage] = useState("");
   
   const navigation = useNavigation();
 
   const onSubmitPressed = () => {
-    navigation.navigate("HomeScreen");
+    if (!password || password.length < 6) {
+      setMessage("Password must be at least 6 characters.")
+    } else if (password !== passwordRepeat) {
+      setMessage("The passwords must match.")
+    } else {
+      navigation.navigate("HomeScreen");
+    }
+    
   };
 
   const onBackToSignInPressed = () => {
@@ -25,21 +34,21 @@ export default function NewPasswordScreen() {
     <ScrollView contentContainerStyle={styles.root}
     showsVerticalScrollIndicator="false">
       <Text style={TextStyles.title}>New password</Text>
+      <Text style={{width: '75%'}}>Enter your new password</Text>
 
-      <Text style={{width: '75%'}}>Confirmation Code *</Text>
       <CustomInput 
-      placeholder="Code"
-      value={code} 
-      setValue={setCode} 
-      />
-
-      <Text style={{width: '75%'}}>Password *</Text>
+        placeholder="Password" 
+        value={password} 
+        setValue={setPassword}
+        secureTextEntry />
       <CustomInput 
-      placeholder="Enter your new password"
-      value={newPassword} 
-      setValue={setNewPassword} 
-      />
+        placeholder="Repeat Password" 
+        value={passwordRepeat} 
+        setValue={setPasswordRepeat}
+        secureTextEntry />
 
+      <Text styles={TextStyles.message}>{message}</Text>
+      
       <CustomButton text="Submit" onPress={onSubmitPressed} />
 
       <CustomButton

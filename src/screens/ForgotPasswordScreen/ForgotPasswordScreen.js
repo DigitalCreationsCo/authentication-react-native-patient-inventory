@@ -5,15 +5,22 @@ import { useNavigation } from '@react-navigation/core';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import { Colors, FontSizes, TextStyles } from '../../../assets/styles';
+import { TextStyles } from '../../../assets/styles';
 
 export default function ForgotPasswordScreen() {
+
   const [username, setUsername] = useState("");
+
+  const [message, setMessage] = useState("");
   
   const navigation = useNavigation();
 
   const onSendPressed = () => {
-    navigation.navigate("NewPasswordScreen");
+    if(!username) {
+      setMessage("Please provide your username.")
+    } else {
+      navigation.navigate("ConfirmEmailScreen");
+    }
   };
 
   const onBackToSignInPressed = () => {
@@ -31,6 +38,8 @@ export default function ForgotPasswordScreen() {
       value={username} 
       setValue={setUsername} 
       />
+
+      <Text style={TextStyles.message}>{message}</Text>
 
       <CustomButton text="Send" onPress={onSendPressed} />
 

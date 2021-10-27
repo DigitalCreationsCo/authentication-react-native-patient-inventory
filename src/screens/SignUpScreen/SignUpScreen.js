@@ -6,7 +6,7 @@ import ClientController from '../../controller/';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
-import { Colors, FontSizes, TextStyles } from '../../../assets/styles';
+import { TextStyles } from '../../../assets/styles';
 
 export default function SignUpScreen() {
 
@@ -15,42 +15,28 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
 
+  const [message, setMessage] = useState("")
+
   const navigation = useNavigation();
 
-  const validatePassword = (password, passwordRepeat) => {
-    if (!password) {
-      console.warn("You provided bad password.")
-    } else if (password.length < 6){
-      console.warn("Password must be at least 6 characters.")
+  const validateForm = (username, email, password, passwordRepeat) => {
+    if (!username || username.length < 7) {
+      setMessage("Username must be at least 7 characters.");
+    } else if (!email || email.length < 8) {
+      setMessage("Your email must be at least 8 characters.")
+    } else if (!password || password.length < 6) {
+      setMessage("Password must be at least 6 characters.")
     } else if (password !== passwordRepeat) {
-      console.warn("The passwords must match.")
+      setMessage("The passwords must match.")
     } else {
       return true
     }
   }
 
-  const validateForm = (username, email, password, passwordRepeat) => {
-    let result = true
-    while (result == true) {
-      if (username.length < 7) {
-        console.warn("Your name must be at least 7 characters.");
-        result = false
-      }
-      if (email.length < 8) {
-        console.warn("Your email must be at least 8 characters.");
-        result = false
-      }
-      if(validatePassword(password, passwordRepeat)){
-        result = true
-      }
-    }
-    return result
-  }
-
   const onRegisterPressed = () => {
     if(validateForm(username, email, password, passwordRepeat)){
-        ClientController.signUp(username, email, password, navigation);
-      }
+      ClientController.signUp(username, email, password, navigation, setMessage);
+    }
   };
 
   const onTermsOfUsePressed = () => {
@@ -88,6 +74,8 @@ export default function SignUpScreen() {
         value={passwordRepeat} 
         setValue={setPasswordRepeat}
         secureTextEntry />
+
+        <Text style={TextStyles.message}>{message}</Text>
 
         <CustomButton text="Register" onPress={onRegisterPressed} />
         

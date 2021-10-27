@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ /*headerShown: false*/ }} >
+      <Stack.Navigator screenOptions={{ headerShown: false }} >
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="ConfirmEmailScreen" component={ConfirmEmailScreen} />

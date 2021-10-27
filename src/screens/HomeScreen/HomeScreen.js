@@ -20,6 +20,7 @@ export default function HomeScreen() {
   return (
     <View style={TextStyles.root}>
       <Text style={TextStyles.title}>Patient List</Text>
+      
       <PatientList />
       <CustomButton 
       onPress={onAddPatientPressed}
